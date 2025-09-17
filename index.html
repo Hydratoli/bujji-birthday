@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday Bujji 🎉</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      color:#fff;overflow:hidden;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .bg{position:fixed;inset:0;background:url('MyGfPic.jpg') center/cover no-repeat;z-index:0;}
+    .overlay{position:fixed;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.6));backdrop-filter:blur(2px);z-index:1;}
+
+    .container{position:relative;z-index:2;height:100vh;display:flex;align-items:center;justify-content:center;padding:3rem;}
+
+    .card{max-width:980px;width:100%;text-align:center;padding:2.2rem;border-radius:18px;
+      background:linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      box-shadow:0 10px 30px rgba(0,0,0,0.45);backdrop-filter:blur(4px);
+    }
+
+    h1{font-family:'Great Vibes',cursive;font-size:4.2rem;margin-bottom:0.2rem;letter-spacing:1px;line-height:1;
+      text-shadow:0 6px 28px rgba(0,0,0,0.6), 0 0 12px rgba(255,200,200,0.06);}
+    .sub{font-weight:400;margin-bottom:1rem;opacity:0.95;font-size:1.05rem;}
+
+    .magic{margin-top:0.6rem;font-size:1.35rem;min-height:46px;letter-spacing:0.4px;font-weight:600;text-shadow:0 4px 14px rgba(0,0,0,0.45);}
+
+    .sparkle{display:inline-block;padding:0.1rem 0.5rem;border-radius:8px;position:relative;animation:glow 2.6s ease-in-out infinite;}
+    @keyframes glow{0%{text-shadow:0 0 0 rgba(255,255,255,0)}50%{text-shadow:0 0 22px rgba(255,200,220,0.6)}100%{text-shadow:0 0 0 rgba(255,255,255,0)}}
+
+    /* flashcards for quotes */
+    .flashcards{margin-top:1.5rem;display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;}
+    .flashcard{width:250px;height:160px;perspective:1000px;}
+    .flashcard-inner{position:relative;width:100%;height:100%;transition:transform 0.9s;transform-style:preserve-3d;cursor:pointer;}
+    .flashcard:hover .flashcard-inner{transform:rotateY(180deg);}
+    .flashcard-front,.flashcard-back{
+      position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;display:flex;align-items:center;justify-content:center;
+      padding:1rem;text-align:center;font-size:1rem;box-shadow:0 8px 20px rgba(0,0,0,0.3);
+    }
+    .flashcard-front{background:rgba(255,255,255,0.1);}
+    .flashcard-back{background:rgba(0,0,0,0.5);transform:rotateY(180deg);}
+
+    .cta{margin-top:1.25rem;display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap}
+    .btn{background:linear-gradient(90deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));border:1px solid rgba(255,255,255,0.12);
+      padding:0.7rem 1.15rem;border-radius:10px;color:#fff;font-weight:600;cursor:pointer;text-decoration:none;
+      backdrop-filter:blur(3px);transition:transform .18s ease, box-shadow .18s ease}
+    .btn:active{transform:translateY(2px)}
+
+    .balloons{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+    .balloon{position:absolute;bottom:-140px;border-radius:120px 120px 100px 100px;opacity:0.95;transform-origin:center bottom;animation:rise linear infinite;box-shadow:0 6px 18px rgba(0,0,0,0.25);}
+    .string{position:absolute;left:50%;transform:translateX(-50%);width:2px;height:70px;background:linear-gradient(#fff0,#fff8);opacity:0.65}
+    @keyframes rise{0%{transform:translateY(0) scale(0.9);opacity:0}6%{opacity:1}100%{transform:translateY(-140vh) rotate(-18deg) scale(1.05);opacity:1}}
+
+    @media (max-width:720px){h1{font-size:3rem}.card{padding:1.3rem;border-radius:12px}.magic{font-size:1rem}}
+
+    .star{position:fixed;right:18px;bottom:18px;z-index:3;opacity:0.85;font-size:22px}
+  </style>
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+  <div class="overlay" aria-hidden="true"></div>
+  <div class="balloons" id="balloons"></div>
+
+  <!-- Background birthday music -->
+  <audio id="bg-music" autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_9a909a7a67.mp3?filename=happy-birthday-118007.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="container">
+    <div class="card" role="main">
+      <h1>Happy Birthday, <span class="sparkle">Bujji</span> 🎉</h1>
+      <div class="sub">From: <strong>nanna</strong></div>
+
+      <div class="magic" id="magicText" aria-live="polite"></div>
+
+      <!-- Flashcards with quotations -->
+      <div class="flashcards">
+        <div class="flashcard"><div class="flashcard-inner"><div class="flashcard-front">Your beauty shines brighter than the stars ✨</div><div class="flashcard-back">I fall for you every day, Bujji ❤️</div></div></div>
+        <div class="flashcard"><div class="flashcard-inner"><div class="flashcard-front">Your kindness makes me a better man 💕</div><div class="flashcard-back">You heal my heart with your love 🌹</div></div></div>
+        <div class="flashcard"><div class="flashcard-inner"><div class="flashcard-front">Your patience with me is my safe place 🌸</div><div class="flashcard-back">Even when I’m angry, you hold me with love 🌈</div></div></div>
+        <div class="flashcard"><div class="flashcard-inner"><div class="flashcard-front">Forever yours, nanna ❤️</div><div class="flashcard-back">I love you endlessly, my Bujji 💍</div></div></div>
+      </div>
+
+      <div class="cta">
+        <button class="btn" id="revealBtn">Open your ❤️ surprise</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="star">✨</div>
+
+  <script>
+    const balloonColors = ['#ff6b9f','#ffd166','#9be7ff','#b39ddb','#ffb4a2','#f9c74f'];
+    const balloonsEl = document.getElementById('balloons');
+    function makeBalloon(){
+      const b = document.createElement('div');
+      const size = Math.random()*60 + 60;
+      b.className='balloon';
+      b.style.width = size + 'px';
+      b.style.height = Math.round(size*1.12) + 'px';
+      b.style.left = (Math.random()*100) + 'vw';
+      b.style.background = balloonColors[Math.floor(Math.random()*balloonColors.length)];
+      b.style.animationDuration = (Math.random()*12 + 10) + 's';
+      const s = document.createElement('div');
+      s.className = 'string';
+      s.style.top = (b.clientHeight - 10) + 'px';
+      b.appendChild(s);
+      balloonsEl.appendChild(b);
+      setTimeout(()=>{b.remove()}, (parseFloat(b.style.animationDuration)*1000)+2000);
+    }
+    for(let i=0;i<10;i++){ setTimeout(makeBalloon,i*350) }
+    setInterval(()=>{ if(window.innerWidth>420) makeBalloon(); },1200);
+
+    const lines = [
+      'To the one whose smile brightens my whole world...',
+      'Your beauty is deeper than the prettiest sunsets...',
+      'Your kindness teaches me how to be gentle...',
+      'Your patience even when I am angry — that is real love.',
+      'Today we celebrate you, Bujji. I love you, always. — nanna'
+    ];
+
+    const magicEl = document.getElementById('magicText');
+    async function typeLine(text, speed=36){
+      magicEl.textContent = '';
+      for(let i=0;i<text.length;i++){
+        magicEl.textContent += text[i];
+        await new Promise(r=>setTimeout(r,speed + Math.random()*20));
+      }
+    }
+    async function playMagic(){
+      for(const l of lines){
+        await typeLine(l,28);
+        await new Promise(r=>setTimeout(r,900));
+      }
+    }
+    setTimeout(playMagic,900);
+
+    const revealBtn = document.getElementById('revealBtn');
+    revealBtn.addEventListener('click',()=>{
+      for(let i=0;i<14;i++) setTimeout(makeBalloon, i*120);
+      const final = document.createElement('div');
+      final.style.position='fixed';final.style.inset='0';final.style.display='flex';
+      final.style.alignItems='center';final.style.justifyContent='center';final.style.zIndex='4';
+      final.style.backdropFilter='blur(4px)';
+      const msg = document.createElement('div');
+      msg.style.padding = '2rem';msg.style.borderRadius='14px';msg.style.maxWidth='720px';
+      msg.style.textAlign='center';msg.style.background='linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.2))';
+      msg.style.boxShadow='0 16px 40px rgba(0,0,0,0.5)';
+      msg.innerHTML = `<div style="font-family: 'Great Vibes', cursive; font-size:3rem; margin-bottom:0.4rem">For my beloved Bujji</div>
+                       <div style="font-size:1.06rem; margin-bottom:1rem">You are my light, my home, and my softest place. Even when I act like nanna — you answer with love. Thank you for being you.</div>
+                       <div style="font-weight:700; font-size:1.04rem; opacity:0.95">Forever yours, <span style='color:#ffd1dc'>nanna</span></div>`;
+      final.appendChild(msg);
+      document.body.appendChild(final);
+      final.addEventListener('click',()=>final.remove());
+    });
+  </script>
+</body>
+</html>
